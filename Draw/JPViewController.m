@@ -7,12 +7,21 @@
 //
 
 #import "JPViewController.h"
+#import "JPDrawView.h"
 
 @interface JPViewController ()
+@property (weak, nonatomic) IBOutlet JPDrawView *drawView;
 
 @end
 
 @implementation JPViewController
+
+
+- (IBAction)drawStyleSegmentedControl:(id)sender
+{
+	UISegmentedControl *segControl = (UISegmentedControl *)sender;
+	[self.drawView setDrawType:(JPDrawViewType)[segControl selectedSegmentIndex]];
+}
 
 - (void)viewDidLoad
 {

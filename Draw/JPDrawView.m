@@ -80,55 +80,62 @@ CGPoint pts[5];
 	CGContextSaveGState(ctx);
 	[[UIColor whiteColor] set];
 	UIRectFill(self.bounds);
-	[self.currentCurvePath setLineWidth:12.0];
-	CGContextSetStrokeColorWithColor(ctx, [UIColor blackColor].CGColor);
-	[self.currentCurvePath stroke];
-	
-	if(self.drawPoints.count)
+	if(self.drawType == JPDrawViewTypeAll || self.drawType == JPDrawViewTypeControlPoints)
 	{
-		CGContextSetStrokeColorWithColor(ctx, [UIColor blueColor].CGColor);
-		CGContextSetLineWidth(ctx, 7.0);
-		CGContextSetLineCap(ctx, kCGLineCapRound);
-		
-		CGContextBeginPath(ctx);
-		CGPoint p0 = [self.drawPoints[0] CGPointValue];
-		CGContextMoveToPoint(ctx, p0.x, p0.y);
-		for(NSUInteger i = 1; i < self.drawPoints.count; ++i)
-		{
-			NSValue *p = self.drawPoints[i];
-			CGPoint point = [p CGPointValue];
-			CGContextAddLineToPoint(ctx, point.x, point.y);
-		}
-		CGContextStrokePath(ctx);
+		[self.currentCurvePath setLineWidth:12.0];
+		CGContextSetStrokeColorWithColor(ctx, [UIColor blackColor].CGColor);
+		[self.currentCurvePath stroke];
 	}
-		
-	if(self.touchPoints.count > 2)
+	if(self.drawType == JPDrawViewTypeAll || self.drawType == JPDrawViewTypeSmoothPoints)
 	{
-		BOOL shouldStroke = NO;
-		for(NSUInteger i = 0; i < self.touchPoints.count; i++)
+		if(self.drawPoints.count)
 		{
-			CGContextSetStrokeColorWithColor(ctx, [UIColor redColor].CGColor);
-			CGContextSetLineWidth(ctx, 3.0f);
-			if((i + 2) < self.touchPoints.count - 1)
+			CGContextSetStrokeColorWithColor(ctx, [UIColor blueColor].CGColor);
+			CGContextSetLineWidth(ctx, 7.0);
+			CGContextSetLineCap(ctx, kCGLineCapRound);
+			
+			CGContextBeginPath(ctx);
+			CGPoint p0 = [self.drawPoints[0] CGPointValue];
+			CGContextMoveToPoint(ctx, p0.x, p0.y);
+			for(NSUInteger i = 1; i < self.drawPoints.count; ++i)
 			{
-				CGPoint first = [self.touchPoints[i] CGPointValue];
-				CGPoint next = [self.touchPoints[i+1] CGPointValue];
-				CGPoint last = [self.touchPoints[i+2] CGPointValue];
-				CGPoint mid1 = midPoint(first, next);
-				CGPoint mid2 = midPoint(next, last);
-				
-				if(!(CGPointEqualToPoint(mid1, CGPointZero) || CGPointEqualToPoint(mid1, CGPointZero)))
+				NSValue *p = self.drawPoints[i];
+				CGPoint point = [p CGPointValue];
+				CGContextAddLineToPoint(ctx, point.x, point.y);
+			}
+			CGContextStrokePath(ctx);
+		}
+	}
+	if(self.drawType == JPDrawViewTypeAll || self.drawType == JPDrawViewTypeQuadCurvePoints)
+	{
+		if(self.touchPoints.count > 2)
+		{
+			BOOL shouldStroke = NO;
+			for(NSUInteger i = 0; i < self.touchPoints.count; i++)
+			{
+				CGContextSetStrokeColorWithColor(ctx, [UIColor redColor].CGColor);
+				CGContextSetLineWidth(ctx, 3.0f);
+				if((i + 2) < self.touchPoints.count - 1)
 				{
-					CGContextMoveToPoint(ctx, mid1.x, mid1.y);
-					// Use QuadCurve is the key
-					CGContextAddQuadCurveToPoint(ctx, next.x, next.y, mid2.x, mid2.y);
-					shouldStroke = YES;
+					CGPoint first = [self.touchPoints[i] CGPointValue];
+					CGPoint next = [self.touchPoints[i+1] CGPointValue];
+					CGPoint last = [self.touchPoints[i+2] CGPointValue];
+					CGPoint mid1 = midPoint(first, next);
+					CGPoint mid2 = midPoint(next, last);
+					
+					if(!(CGPointEqualToPoint(mid1, CGPointZero) || CGPointEqualToPoint(mid1, CGPointZero)))
+					{
+						CGContextMoveToPoint(ctx, mid1.x, mid1.y);
+						// Use QuadCurve is the key
+						CGContextAddQuadCurveToPoint(ctx, next.x, next.y, mid2.x, mid2.y);
+						shouldStroke = YES;
+					}
 				}
 			}
-		}
-		if(shouldStroke)
-		{
-			CGContextStrokePath(ctx);
+			if(shouldStroke)
+			{
+				CGContextStrokePath(ctx);
+			}
 		}
 	}
 	

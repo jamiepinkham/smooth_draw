@@ -8,6 +8,16 @@
 
 #import <UIKit/UIKit.h>
 
+typedef NS_ENUM(NSUInteger, JPDrawViewType)
+{
+	JPDrawViewTypeControlPoints,
+	JPDrawViewTypeSmoothPoints,
+	JPDrawViewTypeQuadCurvePoints,
+	JPDrawViewTypeAll,
+};
+
 @interface JPDrawView : UIView
+
+@property (nonatomic, assign) JPDrawViewType drawType;
 
 @end
