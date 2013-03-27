@@ -18,6 +18,7 @@
 		7D02C4541703303E00322746 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7D02C4531703303E00322746 /* Default-568h@2x.png */; };
 		7D02C4571703303E00322746 /* JPViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D02C4561703303E00322746 /* JPViewController.m */; };
 		7D02C45A1703303E00322746 /* JPViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7D02C4581703303E00322746 /* JPViewController.xib */; };
+		7D02C4621703305300322746 /* JPDrawView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D02C4611703305300322746 /* JPDrawView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -37,6 +38,8 @@
 		7D02C4551703303E00322746 /* JPViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JPViewController.h; sourceTree = "<group>"; };
 		7D02C4561703303E00322746 /* JPViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JPViewController.m; sourceTree = "<group>"; };
 		7D02C4591703303E00322746 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/JPViewController.xib; sourceTree = "<group>"; };
+		7D02C4601703305300322746 /* JPDrawView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JPDrawView.h; sourceTree = "<group>"; };
+		7D02C4611703305300322746 /* JPDrawView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JPDrawView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -89,6 +92,8 @@
 				7D02C4561703303E00322746 /* JPViewController.m */,
 				7D02C4581703303E00322746 /* JPViewController.xib */,
 				7D02C4441703303E00322746 /* Supporting Files */,
+				7D02C4601703305300322746 /* JPDrawView.h */,
+				7D02C4611703305300322746 /* JPDrawView.m */,
 			);
 			path = Draw;
 			sourceTree = "<group>";
@@ -177,6 +182,7 @@
 				7D02C44A1703303E00322746 /* main.m in Sources */,
 				7D02C44E1703303E00322746 /* JPAppDelegate.m in Sources */,
 				7D02C4571703303E00322746 /* JPViewController.m in Sources */,
+				7D02C4621703305300322746 /* JPDrawView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
